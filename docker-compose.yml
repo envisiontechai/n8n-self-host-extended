@@ -30,6 +30,7 @@ x-n8n: &service-n8n
     - N8N_SMTP_SENDER=ai.envisiontech@gmail.com
     - N8N_SMTP_SSL=false
     - NODE_FUNCTION_ALLOW_BUILTIN=crypto
+    - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
   links:
     - postgres
 
