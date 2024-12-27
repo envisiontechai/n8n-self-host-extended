@@ -6,9 +6,7 @@ networks:
   selfn8n:
 
 x-n8n: &service-n8n
-  build:
-    context: .
-    dockerfile: Dockerfile
+  image: n8nio/n8n:latest
   networks: ["selfn8n"]
   environment:
     - DB_TYPE=postgresdb
