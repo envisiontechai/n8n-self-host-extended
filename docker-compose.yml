@@ -21,12 +21,12 @@ x-n8n: &service-n8n
     - WEBHOOK_TUNNEL_URL=https://n8n.envisiontech.agency/
     - WEBHOOK_URL=https://n8n.envisiontech.agency/
     - N8N_EMAIL_MODE=smtp
-    - N8N_SMTP_HOST=smtp-relay.brevo.com
-    - N8N_SMTP_PORT=587
+    - N8N_SMTP_HOST=${SMTP_HOST}
+    - N8N_SMTP_PORT=${SMTP_PORT}
     - N8N_SMTP_USER=${SMTP_USER}
     - N8N_SMTP_PASS=${SMTP_PASS}
-    - N8N_SMTP_SENDER=ai.envisiontech@gmail.com
-    - N8N_SMTP_SSL=false
+    - N8N_SMTP_SENDER=${SMTP_SENDER}
+    - N8N_SMTP_SSL=${SMTP_SSL}
     - NODE_FUNCTION_ALLOW_BUILTIN=crypto
     - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
   links:
