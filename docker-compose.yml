@@ -18,8 +18,8 @@ x-n8n: &service-n8n
     - N8N_ENCRYPTION_KEY
     - GENERIC_TIMEZONE=Asia/Kolkata
     - N8N_USER_MANAGEMENT_JWT_SECRET
-    - WEBHOOK_TUNNEL_URL=https://n8n.envisiontech.agency/
-    - WEBHOOK_URL=https://n8n.envisiontech.agency/
+    - WEBHOOK_TUNNEL_URL=https://n8n.fusionsync.ai/
+    - WEBHOOK_URL=https://n8n.fusionsync.ai/
     - N8N_EMAIL_MODE=smtp
     - N8N_SMTP_HOST=${SMTP_HOST}
     - N8N_SMTP_PORT=${SMTP_PORT}
