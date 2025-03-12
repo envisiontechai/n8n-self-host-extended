@@ -1,6 +1,8 @@
 volumes:
   n8n_storage:
   postgres_storage:
+  qdrant_storage:
+  redis_storage:
 
 networks:
   selfn8n:
@@ -18,8 +20,8 @@ x-n8n: &service-n8n
     - N8N_ENCRYPTION_KEY
     - GENERIC_TIMEZONE=Asia/Kolkata
     - N8N_USER_MANAGEMENT_JWT_SECRET
-    - WEBHOOK_TUNNEL_URL=https://n8n.fusionsync.ai/
-    - WEBHOOK_URL=https://n8n.fusionsync.ai/
+    - WEBHOOK_TUNNEL_URL=${WEBHOOK_TUNNEL_URL}
+    - WEBHOOK_URL=${WEBHOOK_URL}
     - N8N_EMAIL_MODE=smtp
     - N8N_SMTP_HOST=${SMTP_HOST}
     - N8N_SMTP_PORT=${SMTP_PORT}
@@ -51,6 +53,34 @@ services:
           "CMD-SHELL",
           "pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}",
         ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  qdrant:
+    image: qdrant/qdrant
+    container_name: qdrant
+    networks: ["selfn8n"]
+    restart: unless-stopped
+    ports:
+      - 6333:6333
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks: ["selfn8n"]
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_storage:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 5s
       timeout: 5s
       retries: 10
