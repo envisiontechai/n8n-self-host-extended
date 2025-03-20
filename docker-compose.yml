@@ -8,7 +8,7 @@ networks:
   selfn8n:
 
 x-n8n: &service-n8n
-  image: n8nio/n8n:latest
+  image: n8nio/n8n
   networks: ["selfn8n"]
   environment:
     - DB_TYPE=postgresdb
@@ -30,6 +30,8 @@ x-n8n: &service-n8n
     - N8N_SMTP_SENDER=${SMTP_SENDER}
     - N8N_SMTP_SSL=${SMTP_SSL}
     - NODE_FUNCTION_ALLOW_BUILTIN=crypto
+    - N8N_RUNNERS_ENABLED=true
+    - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
     - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
   links:
     - postgres
@@ -110,7 +112,5 @@ services:
       - ./shared:/data/shared
       - ./nodes:/home/node/.n8n/custom
     depends_on:
-      postgres:
-        condition: service_healthy
       n8n-import:
         condition: service_completed_successfully
