@@ -8,7 +8,7 @@ networks:
   selfn8n:
 
 x-n8n: &service-n8n
-  image: n8nio/n8n
+  image: n8nio/n8n:1.78.0
   networks: ["selfn8n"]
   environment:
     - DB_TYPE=postgresdb
@@ -38,7 +38,7 @@ x-n8n: &service-n8n
 
 services:
   postgres:
-    image: postgres:16
+    image: postgres:16-alpine
     networks: ["selfn8n"]
     restart: unless-stopped
     ports:
