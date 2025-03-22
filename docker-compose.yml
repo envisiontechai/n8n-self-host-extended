@@ -38,11 +38,9 @@ x-n8n: &service-n8n
 
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16
     networks: ["selfn8n"]
     restart: unless-stopped
-    ports:
-      - 5432:5432
     environment:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
