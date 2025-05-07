@@ -114,7 +114,7 @@ services:
         condition: service_completed_successfully
 
   crawl4ai:
-    image: unclecode/crawl4ai:basic-arm64
+    image: unclecode/crawl4ai:basic-amd64
     container_name: crawl4ai
     networks: ["selfn8n"]
     environment:
