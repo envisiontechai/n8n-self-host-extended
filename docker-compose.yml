@@ -112,3 +112,22 @@ services:
     depends_on:
       n8n-import:
         condition: service_completed_successfully
+
+  crawl4ai:
+    image: unclecode/crawl4ai:basic-arm64
+    container_name: crawl4ai
+    networks: ["selfn8n"]
+    environment:
+      - CRAWL4AI_API_TOKEN=${CRAWL4AI_API_TOKEN}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MAX_CONCURRENT_TASKS=2
+    volumes:
+      - /dev/shm:/dev/shm
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+    restart: unless-stopped
